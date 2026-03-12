@@ -21,7 +21,7 @@ namespace KlasUitwerking
 
         public string MakeAsString()
         {
-            return this.Value.ToString();
+            return this.Suit.ToString() + " " + this.Value.ToString();
         }
     }
 }

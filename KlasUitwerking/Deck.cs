@@ -6,12 +6,22 @@ namespace KlasUitwerking
 {
     class Deck
     {
-        private List<Card> Cards;
+        private List<Card> CardsRemaining;
         private List<Card> CardsTaken;
+        //new
+        public int TotalCardCount
+        {
+            get
+            {
+                return this.CardsRemaining.Count + this.CardsTaken.Count;
+            }
+        }
 
+        public int CardsRemainingCount => this.CardsRemaining.Count;
+        //oud
         public Deck()
         {
-            this.Cards = new List<Card>();
+            this.CardsRemaining = new List<Card>();
             this.CardsTaken = new List<Card>();
 
             foreach (Suit suit in Enum.GetValues(typeof(Suit)))
@@ -19,30 +29,34 @@ namespace KlasUitwerking
                 foreach (CardValue value in Enum.GetValues(typeof(CardValue)))
                 {
                     Card card = new Card(value, suit);
-                    this.Cards.Add(card);
+                    this.CardsRemaining.Add(card);
                     Console.WriteLine(card.Suit.ToString()
                         + " " + card.Value.ToString());
                 }
             }
         }
 
+        public void AddCard(Card card)
+        {
+            this.CardsRemaining.Add(card);
+        }
         public Card? TakeCard()
         {
-            if(this.Cards.Count == 0)
+            if(this.CardsRemaining.Count == 0)
             {
                 return null;
             }
 
-            Card taken = this.Cards.First();
-            this.Cards.RemoveAt(0);
+            Card taken = this.CardsRemaining.First();
+            this.CardsRemaining.RemoveAt(0);
             this.CardsTaken.Add(taken);
             return taken;
         }
 
         public void Reset()
         {
-            this.Cards = 
-                this.Cards
+            this.CardsRemaining = 
+                this.CardsRemaining
                 .Concat(this.CardsTaken)
                 .ToList();
             this.CardsTaken = new List<Card>();
@@ -50,7 +64,7 @@ namespace KlasUitwerking
 
         public void Shuffle()
         {
-            this.Cards = this.Cards.Shuffle().ToList();
+            this.CardsRemaining = this.CardsRemaining.Shuffle().ToList();
         }
     }
 }

@@ -10,6 +10,9 @@ namespace KlasUitwerking
         //int MaxCards;
         List<int> SelectedIndexes;
 
+        public IEnumerable<Card> CardsInHand => this.Hand;
+        public IEnumerable<int> SelectedCards => this.SelectedIndexes;
+
         public PlayerHand(int maxCards)
         {
             this.MaxCards = maxCards;

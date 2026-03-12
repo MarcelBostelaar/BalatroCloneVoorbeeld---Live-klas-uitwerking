@@ -7,22 +7,17 @@ namespace KlasUitwerking
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Console.Write("Zonder enter");
-            Console.Write("Zonder enter");
+            Deck testDeck = new Deck();
+            PlayerHand hand = new PlayerHand(5);
+            hand.AddCard(testDeck.TakeCard());
+            hand.AddCard(testDeck.TakeCard());
 
-            Console.Clear();
+            Model model = new Model(testDeck, hand);
 
-            string antwoord = Console.ReadLine();
+            ViewModel viewModel = new ViewModel(model);
+            viewModel.UpdateFromModel();
 
-            Console.WriteLine("Antwoord: " + antwoord);
-
-            Card test = new Card(CardValue.Three, Suit.Hearts);
-
-            ////Dit is een harte 2
-            //Card hint = new Card((CardValue)2, Suit.Hearts);
-
-            Deck testdeck = new Deck();
+            viewModel.Run();
         }
     }
 }
